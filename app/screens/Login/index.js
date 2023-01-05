@@ -14,6 +14,16 @@ const estiloComponente = StyleSheet.create({
     color: "#363636",
     fontWeight: "bold",
     fontSize: "1rem"
+  },
+  boxCadastrese: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "10px"
+  },
+  cadastrese: {
+    color: "#2673b3",
   }
 });
 
@@ -30,9 +40,15 @@ function Login({ navigation }) {
       index: 0, // zera a pilha
       routes: [{ name: "Home" }]
     });
+  };
+  const cadastrarUsuario = () => {
+    navigation.navigate("CadastroUsuario");
   }
   const {
-    container, tituloTela
+    container,
+    tituloTela,
+    cadastrese,
+    boxCadastrese
   } = estiloComponente;
   return (
     <View style={container}>
@@ -63,6 +79,9 @@ function Login({ navigation }) {
           title="ENTRAR"
           onPress={entrar}
         />
+        <View style={boxCadastrese}>
+          <Text onPress={cadastrarUsuario} h5 style={cadastrese}>Cadastre-se</Text>
+        </View>
       </View>
     </View>
   )
