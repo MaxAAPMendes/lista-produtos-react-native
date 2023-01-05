@@ -5,7 +5,7 @@ const estiloComponente = StyleSheet.create({
     background: "blue"
   },
   titulo: {
-    color: "#fff"
+    color: "#000"
   }
 });
 

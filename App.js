@@ -5,15 +5,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import Login from './app/screens/Login';
 import Home from './app/screens/Home';
 
-const Rotas = createStackNavigator();
+const Navegacao = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Rotas.Navigator initialRouteName="Login">
-        <Rotas.Screen name="Login" component={Login} />
-        <Rotas.Screen name="Home" component={Home} />
-      </Rotas.Navigator>
+      <Navegacao.Navigator initialRouteName="Login">
+        <Navegacao.Screen name="Login" component={Login} />
+        <Navegacao.Screen name="Home" component={Home} />
+      </Navegacao.Navigator>
     </NavigationContainer>
   )
 }
