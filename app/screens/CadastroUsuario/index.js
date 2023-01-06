@@ -2,43 +2,25 @@ import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from '@rneui/themed';
 import { Input, Button } from 'react-native-elements';
+import { ModelUsuario } from '../../models/usuario';
+
 const estiloComponente = StyleSheet.create({
   container: {
     background: "gray",
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  titulo: {
+    color: "#2673b3"
   },
 });
-
-const dadosInputCadastro = {
-  nome: {
-    nome: "nome",
-    rotulo: "Nome",
-    keyboardType: "default",
-  },
-  telefone: {
-    nome: "telefone",
-    rotulo: "Telefone",
-    keyboardType: "phone-pad",
-  },
-  email: {
-    nome: "email",
-    rotulo: "E-mail",
-    keyboardType: "",
-  },
-  senha: {
-    nome: "senha",
-    rotulo: "Senha",
-    keyboardType: "default",
-  },
-}
 
 function CadastroUsuario() {
   const {
     container,
   } = estiloComponente;
-  // Tela com nome, telefone, e-mail e senha para cadastrar o usuário
+  const dadosInputCadastro = ModelUsuario.inputsDoUsuario();
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
@@ -68,8 +50,8 @@ function CadastroUsuario() {
   }
   return (
     <View style={container}>
-      <Text h3>
-        Cadastrar Usuário
+      <Text h4 style={titulo}>
+        Cadastrar Novo Usuário
       </Text>
       <View>
         {
