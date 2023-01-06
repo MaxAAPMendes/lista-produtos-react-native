@@ -3,7 +3,7 @@ import { Input, Button } from 'react-native-elements';
 import { Text } from '@rneui/themed';
 import { useState } from "react";
 import Schemas from '../../schemas';
-
+import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
 
 const estiloComponente = StyleSheet.create({
   container: {
@@ -13,7 +13,9 @@ const estiloComponente = StyleSheet.create({
     justifyContent: "center",
   },
   tituloTela: {
-    color: "#363636",
+    color: "#2673b3",
+    // color: "#363636",
+    margin: "20px 0px",
     fontWeight: "bold",
     fontSize: "1rem"
   },
@@ -32,7 +34,7 @@ const estiloComponente = StyleSheet.create({
 function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [msgalerta, setMsgAlerta] = useState("");
+  const [msgAlerta, setMsgAlerta] = useState("");
   const [tipoAlerta, setTipoAlerta] = useState(false);
   const schemaLogin = Schemas.schemaLogin();
   const entrar = () => {
@@ -90,11 +92,7 @@ function Login({ navigation }) {
           onChangeText={(value) => setSenha(value)}
           // errorMessage='Entrada inválida'
         />
-        <View>
-          <Text p style={{ minHeight: "20px", fontWeight: "400", color: tipoAlerta ? "green" : "red" }}>
-            {msgalerta}
-          </Text>
-        </View>
+        <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
         <Button
           title="ENTRAR"
           onPress={entrar}
