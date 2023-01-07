@@ -55,7 +55,7 @@ Em todas as telas principais (1a tela do Stack), deverá aparecer um menu latera
 FEITO - Nome do usuário
 FEITO Principal (Tela de produtos)
 FEITO - favoritos (Tela de favoritos)
-!!!! PENDENTE - Botão de logout
+FEITO - Botão de logout
 
 ## TELA DE PRODUTOS
 FEITO - Tela que exibirá em uma lista os dados dos produtos
@@ -65,9 +65,9 @@ FEITO - Cada item deverá mostrar: Nome do Produto, Preço do Produto, Favorito 
 Ao carregar a tela, deverá buscar a posição do usuário.
 
 ## TELA DE FAVORITOS
-Tela exibirá os produtos determinados como favoritos dos usuários.
-A tabela deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
-Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos favoritos /storeProducts/getFavProduts
+FEITO - Tela exibirá os produtos determinados como favoritos dos usuários.
+FEITO - A tabela deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
+!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos favoritos /storeProducts/getFavProduts
 
 ## TELA DETALHES DO PRODUTO
 Tela que exibirá os detalhes de um produto.
