@@ -4,6 +4,7 @@ import { ModelApp } from '../models/app';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
 import CadastroUsuario from '../screens/CadastroUsuario';
+import { DatalhesProduto } from '../Produtos/Detalhes';
 
 const StackNavegacao = createStackNavigator();
 
@@ -21,6 +22,11 @@ export function Stack() {
         name="CadastroUsuario"
         component={CadastroUsuario}
         options={{ title: stackConfig.cadastro.title }}
+      />
+      <StackNavegacao.Screen
+        name="DatalhesProduto"
+        component={DatalhesProduto}
+        options={{ title: "Datalhes do Produto" }}
       />
     </StackNavegacao.Navigator>
   )

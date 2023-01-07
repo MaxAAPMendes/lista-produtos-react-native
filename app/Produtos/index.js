@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { Text, ListItem } from "react-native-elements";
 import { Cabecalho } from './Cabecalho';
 import { ProdutoFavorito } from './ProdutoFavorito';
+import { Icon } from 'react-native-elements';
+import { DatalhesProduto } from './Detalhes';
 
 const estilo = StyleSheet.create({
   container: {
@@ -22,29 +24,29 @@ const mocks = [
     nome: "Uva",
     preco: "R$ 5,00",
     favorito: true,
-    lojas: ["Santo Cristo", "Taguatinga", "Gama"]
+    detalhes: "Detalhes do produto UVA"
   },
   {
     nome: "Maça",
     preco: "R$ 5,00",
     favorito: false,
-    lojas: ["Santo Cristo", "Taguatinga", "Gama"]
+    detalhes: "Detalhes do produto MAÇA"
   },
   {
     nome: "Banana",
     preco: "R$ 5,00",
     favorito: true,
-    lojas: ["Santo Cristo", "Taguatinga", "Gama"]
+    detalhes: "Detalhes do produto BANANA"
   },
   {
     nome: "Tomate",
     preco: "R$ 5,00",
     favorito: false,
-    lojas: ["Santo Cristo", "Taguatinga", "Gama"]
+    detalhes: "Detalhes do produto TOMATE"
   },
 ];
 
-export function Produtos() {
+export function Produtos({ navigation }) {
   const { container, titulo } = estilo;
   return (
     <View style={container}>
@@ -66,7 +68,23 @@ export function Produtos() {
                 </ListItem.Subtitle>
               </ListItem.Content>
               <ListItem.Content>
-                <ListItem.Subtitle>{produto.lojas[0]}</ListItem.Subtitle>
+                <ListItem.Subtitle>
+                <Icon
+                  key={`iconDetalhes${produto.nome}`}
+                  // raised
+                  // containerStyle={{ fontSize: ".5rem" }}
+                  name="list"
+                  type="font-awesome"
+                  color="#696969"
+                  onPress={() => navigation
+                    .navigate(
+                      "DatalhesProduto",
+                      // component={DatalhesProduto},
+                      { produto }
+                    )
+                  }
+                />
+                </ListItem.Subtitle>
               </ListItem.Content>
             </ListItem>
           ))

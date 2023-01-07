@@ -37,3 +37,29 @@ const apiURL = 'https://emailvalidation.abstractapi.com/v1/?api_key=' + apiKey;
           throw error;
       }
    }
+
+# REQUISITOS
+## TELA DE LOGIN
+FEITO - Tela com e-mail e senha para autenticar o usuário:
+FEITO - Abaixo aparecerá um botão de realizar cadastro
+Você utilizará a API MBA Presencial - Trabalho Final - Realiza o login do usuário /storeProducts/login
+FEITO - Utilizar o Yup para realizar a validação
+
+## TELA DE CADASTRO
+FEITO - Tela com nome, telefone, e-mail e senha para cadastrar o usuário
+Você utilizará a API MBA Presencial - Trabalho Final - Realiza o cadastro do usuário /storeProducts/signup
+FEITO - Utilizar o Yup para realizar a validação
+
+## MENU LATERAL
+Em todas as telas principais (1a tela do Stack), deverá aparecer um menu lateral com as opções:
+Nome do usuário
+Principal (Tela de produtos)
+favoritos (Tela de favoritos)
+Botão de logout
+
+## TELA DE PRODUTOS
+FEITO - Tela que exibirá em uma lista os dados dos produtos
+Cada item deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
+Esse ListView utilizará a paginação de resultados.
+Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos /storeProducts/
+Ao carregar a tela, deverá buscar a posição do usuário.
