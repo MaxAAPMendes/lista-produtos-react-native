@@ -71,15 +71,12 @@ export function Produtos({ navigation }) {
                 <ListItem.Subtitle>
                 <Icon
                   key={`iconDetalhes${produto.nome}`}
-                  // raised
-                  // containerStyle={{ fontSize: ".5rem" }}
                   name="list"
                   type="font-awesome"
                   color="#696969"
                   onPress={() => navigation
                     .navigate(
                       "DatalhesProduto",
-                      // component={DatalhesProduto},
                       { produto }
                     )
                   }

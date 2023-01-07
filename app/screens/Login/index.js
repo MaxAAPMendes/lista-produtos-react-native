@@ -31,6 +31,12 @@ const estiloComponente = StyleSheet.create({
   }
 });
 
+const mockUsuario = {
+  nome: "José Testes da Silva",
+  idade: "26 anos",
+  cargo: "Gerente"
+}
+
 function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -44,7 +50,7 @@ function Login({ navigation }) {
         if (valido) {
           navigation.reset({
             index: 0, // zera a pilha
-            routes: [{ name: "Home", params: {nome: "jose"} }],
+            routes: [{ name: "Home", params: mockUsuario }],
           });
         }
       });

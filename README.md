@@ -52,14 +52,14 @@ FEITO - Utilizar o Yup para realizar a validação
 
 ## MENU LATERAL
 Em todas as telas principais (1a tela do Stack), deverá aparecer um menu lateral com as opções:
-Nome do usuário
-Principal (Tela de produtos)
+FEITO - Nome do usuário
+FEITO Principal (Tela de produtos)
 favoritos (Tela de favoritos)
 Botão de logout
 
 ## TELA DE PRODUTOS
 FEITO - Tela que exibirá em uma lista os dados dos produtos
-Cada item deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
+FEITO - Cada item deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
 Esse ListView utilizará a paginação de resultados.
 Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos /storeProducts/
 Ao carregar a tela, deverá buscar a posição do usuário.

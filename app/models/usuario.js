@@ -1,5 +1,9 @@
 export class ModelUsuario {
 
+  constructor() {
+    this.dadosUsuario = null;
+  }
+
   static inputsDoUsuario() {
     const dadosInputCadastro = {
       nome: {
@@ -24,6 +28,10 @@ export class ModelUsuario {
       },
     }
     return dadosInputCadastro;
+  }
+
+  getDadosusuario(dadosUsuario) {
+    this.dadosUsuario = dadosUsuario;
   }
 
 }
