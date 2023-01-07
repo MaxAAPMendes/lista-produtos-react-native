@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, ListItem } from "react-native-elements";
 import { Cabecalho } from './Cabecalho';
 import { ProdutoFavorito } from './ProdutoFavorito';
 import { Icon } from 'react-native-elements';
-import { DatalhesProduto } from './Detalhes';
 
 const estilo = StyleSheet.create({
   container: {
@@ -51,7 +49,7 @@ export function Produtos({ navigation }) {
   return (
     <View style={container}>
       <Text h5 style={titulo}>Lista de Produtos Cadastrados</Text>
-      <View style={{ width: "100%" }}>
+      <View style={{ width: "95%" }}>
         <Cabecalho />
         {
           mocks.map((produto, i) => (

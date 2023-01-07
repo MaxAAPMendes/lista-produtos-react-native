@@ -20,4 +20,8 @@ export class Produtos {
     ];
     return dados;
   }
+
+  static camposDetalhes() {
+    return ['nome', 'preco', 'favorito']
+  }
 }

@@ -11,7 +11,7 @@ const StackNavegacao = createStackNavigator();
 export function Stack() {
   const stackConfig = ModelApp.configStack();
   return (
-    <StackNavegacao.Navigator initialRouteName="Login" screenOptions={{ title: stackConfig.login.title }}>
+    <StackNavegacao.Navigator initialRouteName="Home" screenOptions={{ title: stackConfig.login.title }}>
       <StackNavegacao.Screen name="Login" component={Login} />
       <StackNavegacao.Screen
         name="Home"

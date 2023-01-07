@@ -1,5 +1,7 @@
 import { View, StyleSheet } from 'react-native';
-import { Icon, Text } from 'react-native-elements';
+import { Icon, Text, ListItem } from 'react-native-elements';
+import { Produtos } from '../models/produtos';
+import { ProdutoFavorito } from './ProdutoFavorito';
 
 const estilo = StyleSheet.create({
   container: {
@@ -16,6 +18,8 @@ const estilo = StyleSheet.create({
 
 export function DatalhesProduto({ route }) {
   console.log("Componente detalhes", route.params?.produto);
+  const cabecalho = Produtos.dadosCabecalho().filter((i) => i.campo !== 'detalhes');
+  const camposDetalhes = Produtos.camposDetalhes();
   const { produto } = route.params;
   const { container, titulo } = estilo;
   return (
@@ -25,11 +29,36 @@ export function DatalhesProduto({ route }) {
       </Text>
       {
         produto && (
-          <Text>
-            {produto.detalhes}
-          </Text>
+          <View style={{ width: "95%" }}>
+            <ListItem>
+              {
+                cabecalho.map((item) => (
+                  <ListItem.Content key={`cont-${item.rotulo}`}>
+                    <ListItem.Title key={`title-${item.rotulo}`}>{item.rotulo}</ListItem.Title>
+                  </ListItem.Content>
+                ))
+              }
+            </ListItem>
+            <ListItem>
+              {
+                camposDetalhes.map((campo) => (
+                  <ListItem.Content key={`cont-fav${produto[campo]}`}>
+                    <ListItem.Subtitle key={`lifav${produto[campo]}`}>
+                      {campo === 'favorito'
+                        ? <ProdutoFavorito produto={produto}/>
+                        : produto[campo]
+                      }
+                    </ListItem.Subtitle>
+                  </ListItem.Content>
+                ))
+              }
+            </ListItem>
+          </View>
         )
       }
+      <View>
+        mapa
+      </View>
     </View>
   )
 }
