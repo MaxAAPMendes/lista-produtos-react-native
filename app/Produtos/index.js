@@ -3,6 +3,7 @@ import { Text, ListItem } from "react-native-elements";
 import { Cabecalho } from './Cabecalho';
 import { ProdutoFavorito } from './ProdutoFavorito';
 import { Icon } from 'react-native-elements';
+import { ListaProdutos } from './ListaProdutos';
 
 const estilo = StyleSheet.create({
   container: {
@@ -51,38 +52,39 @@ export function Produtos({ navigation }) {
       <Text h5 style={titulo}>Lista de Produtos Cadastrados</Text>
       <View style={{ width: "95%" }}>
         <Cabecalho />
+        <ListaProdutos listaProdutos={mocks} navigation={navigation}/>
         {
-          mocks.map((produto, i) => (
-            <ListItem key={`${produto.nome}-${i}`} bottomDivider>
-              <ListItem.Content key={`cont-nome${produto.nome}-${i}`}>
-                <ListItem.Title key={`linome${produto.nome}-${i}`}>{produto.nome}</ListItem.Title>
-              </ListItem.Content>
-              <ListItem.Content key={`cont-preco${produto.nome}-${i}`}>
-                <ListItem.Subtitle key={`lipreco${produto.nome}-${i}`}>{produto.preco}</ListItem.Subtitle>
-              </ListItem.Content>
-              <ListItem.Content key={`cont-fav${produto.nome}-${i}`}>
-                <ListItem.Subtitle key={`lifav${produto.nome}-${i}`}>
-                  <ProdutoFavorito produto={produto}/>
-                </ListItem.Subtitle>
-              </ListItem.Content>
-              <ListItem.Content>
-                <ListItem.Subtitle>
-                <Icon
-                  key={`iconDetalhes${produto.nome}`}
-                  name="list"
-                  type="font-awesome"
-                  color="#696969"
-                  onPress={() => navigation
-                    .navigate(
-                      "DatalhesProduto",
-                      { produto }
-                    )
-                  }
-                />
-                </ListItem.Subtitle>
-              </ListItem.Content>
-            </ListItem>
-          ))
+          // mocks.map((produto, i) => (
+          //   <ListItem key={`${produto.nome}-${i}`} bottomDivider>
+          //     <ListItem.Content key={`cont-nome${produto.nome}-${i}`}>
+          //       <ListItem.Title key={`linome${produto.nome}-${i}`}>{produto.nome}</ListItem.Title>
+          //     </ListItem.Content>
+          //     <ListItem.Content key={`cont-preco${produto.nome}-${i}`}>
+          //       <ListItem.Subtitle key={`lipreco${produto.nome}-${i}`}>{produto.preco}</ListItem.Subtitle>
+          //     </ListItem.Content>
+          //     <ListItem.Content key={`cont-fav${produto.nome}-${i}`}>
+          //       <ListItem.Subtitle key={`lifav${produto.nome}-${i}`}>
+          //         <ProdutoFavorito produto={produto}/>
+          //       </ListItem.Subtitle>
+          //     </ListItem.Content>
+          //     <ListItem.Content>
+          //       <ListItem.Subtitle>
+          //       <Icon
+          //         key={`iconDetalhes${produto.nome}`}
+          //         name="list"
+          //         type="font-awesome"
+          //         color="#696969"
+          //         onPress={() => navigation
+          //           .navigate(
+          //             "DatalhesProduto",
+          //             { produto }
+          //           )
+          //         }
+          //       />
+          //       </ListItem.Subtitle>
+          //     </ListItem.Content>
+          //   </ListItem>
+          // ))
         }
       </View>
     </View>

@@ -54,12 +54,26 @@ FEITO - Utilizar o Yup para realizar a validação
 Em todas as telas principais (1a tela do Stack), deverá aparecer um menu lateral com as opções:
 FEITO - Nome do usuário
 FEITO Principal (Tela de produtos)
-favoritos (Tela de favoritos)
-Botão de logout
+FEITO - favoritos (Tela de favoritos)
+!!!! PENDENTE - Botão de logout
 
 ## TELA DE PRODUTOS
 FEITO - Tela que exibirá em uma lista os dados dos produtos
 FEITO - Cada item deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
-Esse ListView utilizará a paginação de resultados.
-Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos /storeProducts/
+!!!! PENDENTE - Esse ListView utilizará a paginação de resultados.
+!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos /storeProducts/
 Ao carregar a tela, deverá buscar a posição do usuário.
+
+## TELA DE FAVORITOS
+Tela exibirá os produtos determinados como favoritos dos usuários.
+A tabela deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
+Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos favoritos /storeProducts/getFavProduts
+
+## TELA DETALHES DO PRODUTO
+Tela que exibirá os detalhes de um produto.
+A tela deverá mostrar:
+FEITO - Nome do Produto
+FEITO - Preço do Produto
+FEITO - Se é Favorito do usuário (e um botão para marcar/desmarcar favorito)
+!!!! PENDENTE - Mapa com a posição do usuário e as lojas com o produto disponível
+!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca informação de um produto /storeProducts/product/:productID e API MBA Presencial - Trabalho Final - Adicionar ou remove um produto como favorito da pessoa /storeProducts/manageFavorite
