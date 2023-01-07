@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
+import { MenuLateral } from "../../Navegacao/MenuLateral";
 
 const estiloComponente = StyleSheet.create({
   container: {
-    background: "blue"
+    backgroundColor: "blue"
   },
   titulo: {
     color: "#000"
@@ -14,9 +15,12 @@ function Home() {
     container, titulo
   } = estiloComponente;
   return(
-    <View style={container}>
-      <Text style={titulo}>Tela Principal - Home</Text>
-    </View>
+    <>
+      <View style={container}>
+        <Text style={titulo}>Tela Principal - Home</Text>
+      </View>
+      <MenuLateral />
+    </>
   )
 };
 

@@ -7,7 +7,7 @@ import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
 
 const estiloComponente = StyleSheet.create({
   container: {
-    background: "gray",
+    backgroundColor: "#f2f2f2",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -15,7 +15,7 @@ const estiloComponente = StyleSheet.create({
   tituloTela: {
     color: "#2673b3",
     // color: "#363636",
-    margin: "20px 0px",
+    margin: "10px",
     fontWeight: "bold",
     fontSize: "1rem"
   },

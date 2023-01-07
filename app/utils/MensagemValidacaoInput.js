@@ -9,12 +9,12 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     margin: "10px",
-    padding: "0px 10px",
+    padding: "10px",
     textAlign: "left",
   },
   texto: {
-    margin: "10px",
-    padding: "0px 10px",
+    margin: "5px",
+    padding: "10px",
     width: "100%",
     fontWeight: "400",
   }

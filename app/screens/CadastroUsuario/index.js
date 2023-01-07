@@ -9,14 +9,14 @@ import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
 
 const estiloComponente = StyleSheet.create({
   container: {
-    background: "gray",
+    backgroundColor: "#f2f2f2",
     // flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   titulo: {
     color: "#2673b3",
-    margin: "20px 0px"
+    margin: "20px"
   },
 });
 
@@ -71,8 +71,8 @@ function CadastroUsuario() {
   }
   return (
     <View style={container}>
-      <Text h4 style={titulo}>
-        Cadastrar Novo Usuário
+      <Text h5 style={titulo}>
+        Dados do novo Usuário
       </Text>
       {
         Object.keys(dadosInputCadastro).map((item) => (
@@ -88,7 +88,9 @@ function CadastroUsuario() {
           />
         ))
       }
-      <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
+      <View>
+        <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
+      </View>
       <View>
         <Button
           title="CADASTRAR"
