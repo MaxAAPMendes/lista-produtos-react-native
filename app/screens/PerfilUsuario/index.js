@@ -1,9 +1,9 @@
 import { Text } from "react-native-elements"
 
-export function PerfilUsuario() {
+export function PerfilUsuario({ route }) {
+  console.log("perfil", route);
+  // const nomeUsuario = route
   return (
-    <Text p>
-      Nome usuário
-    </Text>
+    <Text p>Perfil</Text>
   )
 }

@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import { Text as TextUi } from '@rneui/themed';
 import { MenuLateral } from "../../Navegacao/MenuLateral";
 
 const estiloComponente = StyleSheet.create({
@@ -10,18 +11,13 @@ const estiloComponente = StyleSheet.create({
   }
 });
 
-function Home() {
+function Home({ route }) {
+  console.log("home", route);
+  const { params } = route;
   const {
     container, titulo
   } = estiloComponente;
-  return(
-    <>
-      <View style={container}>
-        <Text style={titulo}>Tela Principal - Home</Text>
-      </View>
-      <MenuLateral />
-    </>
-  )
+  return (<MenuLateral dadosUsuario={params}/>)
 };
 
 export default Home;

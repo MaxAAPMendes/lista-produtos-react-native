@@ -44,7 +44,7 @@ function Login({ navigation }) {
         if (valido) {
           navigation.reset({
             index: 0, // zera a pilha
-            routes: [{ name: "Home" }]
+            routes: [{ name: "Home", params: {nome: "jose"} }],
           });
         }
       });

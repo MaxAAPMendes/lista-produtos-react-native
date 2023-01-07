@@ -12,7 +12,11 @@ export function Stack() {
   return (
     <StackNavegacao.Navigator initialRouteName="Home" screenOptions={{ title: stackConfig.login.title }}>
       <StackNavegacao.Screen name="Login" component={Login} />
-      <StackNavegacao.Screen name="Home" component={Home} options={{ title: stackConfig.home.title }} />
+      <StackNavegacao.Screen
+        name="Home"
+        component={Home}
+        options={{ title: stackConfig.home.title, headerShown: false }}
+      />
       <StackNavegacao.Screen
         name="CadastroUsuario"
         component={CadastroUsuario}
