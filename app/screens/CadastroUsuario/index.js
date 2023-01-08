@@ -7,6 +7,7 @@ import Schemas from '../../schemas';
 import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
 
 
+
 const estiloComponente = StyleSheet.create({
   container: {
     backgroundColor: "#f2f2f2",
@@ -72,11 +73,12 @@ function CadastroUsuario() {
   return (
     <View style={container}>
       <Text h5 style={titulo}>
-        Dados do novo Usuário
+        Dados do novo usuário
       </Text>
       {
         Object.keys(dadosInputCadastro).map((item) => (
           <Input
+            maxLength={dadosInputCadastro[item].nome === "senha" ? 8 : null}
             name={dadosInputCadastro[item].nome}
             placeholder={dadosInputCadastro[item].rotulo}
             errorStyle={{ color: 'red' }}
