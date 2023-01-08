@@ -1,34 +1,35 @@
 import { config } from '../config';
-import { Mensagem } from '../../app/utils/Mensagens';
 
 export class Usuario {
   
-  async cadastrarUsuario() {
+  async cadastrarUsuario(body) {
     const { rest } = config();
+    console.log(rest)
     try {
       console.log("cadastrando novo usuário...");
       // https://fiap-reactjs-presencial.herokuapp.com/
       const usuario = await rest.put('storeProducts/signup', body);
       console.log('usuário cadastrado', usuario);
-      <Mensagem
-        texto="Usuário cadastrado com sucesso"
-        tipoAlerta="sucesso"
-      />
-      return usuario;
+      const mensagem = usuario.message || "usuário cadastrado";
+      return {
+        usuario
+      };
     } catch (error) {
       console.log("Erro ao cadastrar usuário", error);
-      // Snackbar.show({
-      //   text: "Erro ao cadastrar usuário",
-      //   duration: Snackbar.LENGTH_SHORT,
-      //   backgroundColor
-      // })
-      <Mensagem
-        texto="Erro ao cadastrar usuário"
-        tipoAlerta="erro"
-      />
+      const { response } = error;
+      const { status, data } = response;
+      const mensagem = data.data[0].msg || error.message;
+      return {
+        status,
+        mensagem,
+        data
+      };
     }
   }
 }
+
+const controllerUsuario = new Usuario();
+export default controllerUsuario;
 
 /*
 200

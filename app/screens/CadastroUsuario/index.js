@@ -5,7 +5,7 @@ import { Input, Button } from 'react-native-elements';
 import { ModelUsuario } from '../../models/usuario';
 import Schemas from '../../schemas';
 import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
-
+import controllerUsuario from '../../../api/controllers/usuario';
 
 
 const estiloComponente = StyleSheet.create({
@@ -34,6 +34,7 @@ function CadastroUsuario() {
   const [senha, setSenha] = useState("");
   const [msgAlerta, setMsgAlerta] = useState("");
   const [tipoAlerta, setTipoAlerta] = useState(false);
+  const [spinner, setSpinner] = useState(false);
   const capturarInput = (item, value) => {
     switch (item) {
       case "nome":
@@ -56,11 +57,32 @@ function CadastroUsuario() {
     console.log("cadastrar");
     const dadosCadastro = { nome, telefone, email, senha }
     schemaCadastro.isValid(dadosCadastro)
-      .then((valido) => {
+      .then(async (valido) => {
         setTipoAlerta(valido);
         if (valido) {
           // chamar método post para cadastrar usuário
-          console.log("chamar método post para cadastrar usuário");
+          const body = {
+            name: nome,
+            phone: telefone,
+            email,
+            password: senha
+          }
+          console.log("chamar método post para cadastrar usuário", body);
+          setSpinner(true);
+          const res = await controllerUsuario.cadastrarUsuario(body);
+          console.log("ssss", res);
+          setSpinner(false);
+          setMsgAlerta("Usuário Cadastrado")
+          // tratar retorno
+          // <Mensagem
+          //   texto="Usuário cadastrado com sucesso"
+          //   tipoAlerta="sucesso"
+          // />
+          // tratar erro
+          // <Mensagem
+          //   texto="Erro ao cadastrar usuário"
+          //   tipoAlerta="erro"
+          // />
         }
       });
     schemaCadastro.validate(dadosCadastro)
@@ -94,10 +116,23 @@ function CadastroUsuario() {
         <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
       </View>
       <View>
-        <Button
-          title="CADASTRAR"
-          onPress={cadastrar}
-        />
+        {
+          spinner
+          ? (
+            <Button
+              title="Cadastrando usuário"
+              onPress={cadastrar}
+              disabled={true}
+              containerStyle={{ backgroundColor: "#f2f2f2"}}
+            />
+          )
+          : (
+            <Button
+              title="CADASTRAR"
+              onPress={cadastrar}
+            />
+          )
+        }
       </View>
     </View>
   )

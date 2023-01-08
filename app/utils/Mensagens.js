@@ -1,4 +1,4 @@
-import Snackbar from 'react-native-snackbar';
+// import Snackbar from 'react-native-snackbar';
 
 const estilo = {
   sucesso: {
@@ -13,11 +13,11 @@ const estilo = {
   }
 }
 export function Mensagem({ texto, tipoAlerta, acao }) {
-  return Snackbar.show({
-    text: texto,
-    duration: Snackbar.LENGTH_SHORT,
-    backgroundColor: estilo[tipoAlerta].backgroundColor || "#2673b3",
-    textColor: estilo[tipoAlerta].backgroundColor || "#fff",
-    onPress: () => acao
-  })
+  // return Snackbar.show({
+  //   text: texto,
+  //   duration: Snackbar.LENGTH_SHORT,
+  //   backgroundColor: estilo[tipoAlerta].backgroundColor || "#2673b3",
+  //   textColor: estilo[tipoAlerta].backgroundColor || "#fff",
+  //   onPress: () => acao
+  // })
 }

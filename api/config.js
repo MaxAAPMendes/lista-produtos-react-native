@@ -1,11 +1,11 @@
-import * as axios from "axios";
+import axios from "axios";
 
 // https://fiap-reactjs-presencial.herokuapp.com/storeProducts/signup
 export function config() {
 
   const rest = axios.create({
-    baseUrl: 'https://fiap-reactjs-presencial.herokuapp.com/',
-    timeout: 2000,
+    baseURL: 'https://fiap-reactjs-presencial.herokuapp.com/',
+    timeout: 5000,
   })
 
   return {
