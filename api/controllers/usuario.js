@@ -4,15 +4,16 @@ export class Usuario {
   
   async cadastrarUsuario(body) {
     const { rest } = config();
-    console.log(rest)
     try {
       console.log("cadastrando novo usuário...");
       // https://fiap-reactjs-presencial.herokuapp.com/
       const usuario = await rest.put('storeProducts/signup', body);
       console.log('usuário cadastrado', usuario);
-      const mensagem = usuario.message || "usuário cadastrado";
       return {
-        usuario
+        status: "sucesso",
+        statusCode: 200,
+        mensagem: "Usuário cadastrado com sucesso",
+        data: usuario
       };
     } catch (error) {
       console.log("Erro ao cadastrar usuário", error);
@@ -20,7 +21,8 @@ export class Usuario {
       const { status, data } = response;
       const mensagem = data.data[0].msg || error.message;
       return {
-        status,
+        status: "erro",
+        statusCode: status,
         mensagem,
         data
       };
@@ -33,9 +35,14 @@ export default controllerUsuario;
 
 /*
 200
+j@gmail.com
 {
 	"message": "User created successfully",
 	"userId": "63bb2c041f11992431703b5b"
 }
 
+jt@gmail.com
+message: "User created successfully"
+​​
+userId: "63bc83739b02e844c65d8065"
 */

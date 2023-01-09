@@ -33,7 +33,7 @@ function CadastroUsuario() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [msgAlerta, setMsgAlerta] = useState("");
-  const [tipoAlerta, setTipoAlerta] = useState(false);
+  const [tipoAlerta, setTipoAlerta] = useState("");
   const [spinner, setSpinner] = useState(false);
   const capturarInput = (item, value) => {
     switch (item) {
@@ -54,11 +54,10 @@ function CadastroUsuario() {
     }
   }
   const cadastrar = () => {
-    console.log("cadastrar");
+    console.log("cadastrar usuário");
     const dadosCadastro = { nome, telefone, email, senha }
     schemaCadastro.isValid(dadosCadastro)
       .then(async (valido) => {
-        setTipoAlerta(valido);
         if (valido) {
           // chamar método post para cadastrar usuário
           const body = {
@@ -69,24 +68,15 @@ function CadastroUsuario() {
           }
           console.log("chamar método post para cadastrar usuário", body);
           setSpinner(true);
-          const res = await controllerUsuario.cadastrarUsuario(body);
-          console.log("ssss", res);
+          const resultado = await controllerUsuario.cadastrarUsuario(body);
+          console.log("ssss", resultado);
           setSpinner(false);
-          setMsgAlerta("Usuário Cadastrado")
-          // tratar retorno
-          // <Mensagem
-          //   texto="Usuário cadastrado com sucesso"
-          //   tipoAlerta="sucesso"
-          // />
-          // tratar erro
-          // <Mensagem
-          //   texto="Erro ao cadastrar usuário"
-          //   tipoAlerta="erro"
-          // />
+          setTipoAlerta(resultado.status === "sucesso");
+          setMsgAlerta(resultado.mensagem);
         }
       });
     schemaCadastro.validate(dadosCadastro)
-      .then(() => setMsgAlerta("Dados válidos para cadastro"))
+      .then(() => console.log("Dados válidos para cadastro"))
       .catch((err) => {
         const erro = err.errors[0] || ""; 
         setMsgAlerta(erro);

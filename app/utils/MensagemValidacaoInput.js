@@ -11,6 +11,8 @@ const estilos = StyleSheet.create({
     margin: "10px",
     padding: "10px",
     textAlign: "left",
+    borderRadius: "6px",
+    boxShadow: "2px 2px 2px #f2f2f2"
   },
   texto: {
     margin: "5px",
@@ -18,7 +20,7 @@ const estilos = StyleSheet.create({
     width: "100%",
     fontWeight: "400",
   }
-})
+});
 
 export function MensagemValidacaoInput({tipoAlerta, msgAlerta}) {
   const {
