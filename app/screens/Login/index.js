@@ -39,6 +39,21 @@ const mockUsuario = {
   idade: "26 anos",
   cargo: "Gerente"
 }
+function getCookie(cName) {
+  const name = cName + "=";
+  const cDecoded = decodeURIComponent(document.cookie); //to be careful
+  const cArr = cDecoded .split('; ');
+  let res;
+  cArr.forEach(val => {
+      if (val.indexOf(name) === 0) res = val.substring(name.length);
+  })
+  console.log("getCookie", res);
+  return res;
+}
+const gerarCookie = (token) => {
+  // document.cookie = `tokenUser=${token}; `
+  localStorage.setItem('tokenUser', token);
+}
 
 function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -54,8 +69,11 @@ function Login({ navigation }) {
   const schemaLogin = Schemas.schemaLogin();
   const navegarParaSistema = () => {
     const {statusLogin, token, dadosUsuario } = dadosLogin;
-    console.log("navegando", statusLogin, token)
-    if (statusLogin && token) {
+    console.log("navegando", statusLogin, token);
+    // const cookie = getCookie("tokenUser");
+    const cookie = localStorage.getItem("tokenUser");
+    console.log('wwwww', cookie)
+    if (token || cookie) {
       return navigation.reset({
         index: 0, // zera a pilha
         routes: [{ name: "Home", params: dadosUsuario }],
@@ -79,6 +97,11 @@ function Login({ navigation }) {
           const logado = await controllerUsuario.logar(body);
           setSpinner(false);
           console.log("logdo no logn", logado);
+          if (logado.status !== 200) {
+            setTipoAlerta(false);
+            setMsgAlerta(logado.data.message || "Erro ao logar");
+            return null;
+          }
           setDadosLogin({
             statusLogin: logado.status,
             token: logado.data.token,
@@ -88,6 +111,7 @@ function Login({ navigation }) {
               telefone: logado.data.phone || "não identificado"
             }
           })
+          gerarCookie(logado.data.token);
           navegarParaSistema();
         }
       });
