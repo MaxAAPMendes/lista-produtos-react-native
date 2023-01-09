@@ -6,7 +6,7 @@ import { ModelUsuario } from '../../models/usuario';
 import Schemas from '../../schemas';
 import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
 import controllerUsuario from '../../../api/controllers/usuario';
-
+import { BotaoAcao } from '../../utils/BotaoAcao';
 
 const estiloComponente = StyleSheet.create({
   container: {
@@ -106,7 +106,7 @@ function CadastroUsuario() {
         <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
       </View>
       <View>
-        {
+        {/* {
           spinner
           ? (
             <Button
@@ -122,7 +122,13 @@ function CadastroUsuario() {
               onPress={cadastrar}
             />
           )
-        }
+        } */}
+        <BotaoAcao
+          titulo={spinner ? "Cadastrando usuário..." : "CADASTRAR"}
+          acao={cadastrar}
+          desativado={spinner}
+          estilo={spinner ? { backgroundColor: "#f2f2f2"} : null}
+        />
       </View>
     </View>
   )

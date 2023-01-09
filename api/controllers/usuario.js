@@ -1,7 +1,16 @@
 import { config } from '../config';
 
 export class Usuario {
-  
+  async logar(body) {
+    const { rest } = config();
+    try {
+      const logado = await rest.post('storeProducts/login', body);
+      console.log("usuário logado", logado);
+      return logado;
+    } catch (error) {
+      console.log("Erro ao logar", error);
+    }
+  }
   async cadastrarUsuario(body) {
     const { rest } = config();
     try {

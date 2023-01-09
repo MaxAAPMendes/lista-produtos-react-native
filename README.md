@@ -47,7 +47,7 @@ FEITO - Utilizar o Yup para realizar a validação
 
 ## TELA DE CADASTRO
 FEITO - Tela com nome, telefone, e-mail e senha para cadastrar o usuário
-Você utilizará a API MBA Presencial - Trabalho Final - Realiza o cadastro do usuário /storeProducts/signup
+FEITO - Você utilizará a API MBA Presencial - Trabalho Final - Realiza o cadastro do usuário /storeProducts/signup
 FEITO - Utilizar o Yup para realizar a validação
 
 ## MENU LATERAL

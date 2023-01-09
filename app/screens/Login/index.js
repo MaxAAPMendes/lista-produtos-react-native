@@ -1,9 +1,12 @@
-import { View, StyleSheet, TextInput } from "react-native";
+import { useEffect } from "react";
+import { View, StyleSheet } from "react-native";
 import { Input, Button } from 'react-native-elements';
 import { Text } from '@rneui/themed';
 import { useState } from "react";
 import Schemas from '../../schemas';
 import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
+import controllerUsuario from '../../../api/controllers/usuario';
+import { BotaoAcao } from '../../utils/BotaoAcao';
 
 const estiloComponente = StyleSheet.create({
   container: {
@@ -42,20 +45,54 @@ function Login({ navigation }) {
   const [senha, setSenha] = useState("");
   const [msgAlerta, setMsgAlerta] = useState("");
   const [tipoAlerta, setTipoAlerta] = useState(false);
+  const [spinner, setSpinner] = useState(false);
+  const [dadosLogin, setDadosLogin] = useState({
+    statusLogin: null,
+    token: null,
+    dadosUsuario: null
+  });
   const schemaLogin = Schemas.schemaLogin();
+  const navegarParaSistema = () => {
+    const {statusLogin, token, dadosUsuario } = dadosLogin;
+    console.log("navegando", statusLogin, token)
+    if (statusLogin && token) {
+      return navigation.reset({
+        index: 0, // zera a pilha
+        routes: [{ name: "Home", params: dadosUsuario }],
+      });
+    }
+  }
+  useEffect(() => {
+    console.log("useEffect...")
+    navegarParaSistema();
+  }, [dadosLogin]);
   const entrar = () => {
     schemaLogin.isValid({email, senha})
-      .then((valido) => {
+      .then(async (valido) => {
         setTipoAlerta(valido);
         if (valido) {
-          navigation.reset({
-            index: 0, // zera a pilha
-            routes: [{ name: "Home", params: mockUsuario }],
-          });
+          const body = {
+            email,
+            password: senha
+          }
+          setSpinner(true);
+          const logado = await controllerUsuario.logar(body);
+          setSpinner(false);
+          console.log("logdo no logn", logado);
+          setDadosLogin({
+            statusLogin: logado.status,
+            token: logado.data.token,
+            dadosUsuario: {
+              nome: logado.data.name || "não identificado",
+              id: logado.data.userId || "não identificado",
+              telefone: logado.data.phone || "não identificado"
+            }
+          })
+          navegarParaSistema();
         }
       });
     schemaLogin.validate({email, senha})
-      .then(() => setMsgAlerta("Dados válidos"))
+      .then(() => () => console.log("Dados de login válidos"))
       .catch((err) => {
         const erro = err.errors[0] || ""; 
         setMsgAlerta(erro);
@@ -99,9 +136,15 @@ function Login({ navigation }) {
           // errorMessage='Entrada inválida'
         />
         <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
-        <Button
-          title="ENTRAR"
+        {/* <Button
+          title=
           onPress={entrar}
+        /> */}
+        <BotaoAcao
+          titulo={spinner ? "Logando..." : "ENTRAR"}
+          acao={entrar}
+          desativado={spinner}
+          estilo={spinner ? { backgroundColor: "#f2f2f2"} : null}
         />
         <View style={boxCadastrese}>
           <Text onPress={cadastrarUsuario} h5 style={cadastrese}>Cadastre-se</Text>

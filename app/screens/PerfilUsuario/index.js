@@ -33,7 +33,7 @@ export function PerfilUsuario({ route }) {
       {
         params 
         ? Object.keys(params).map((item) => (
-          <Text p style={titulo} key={params[item]}>{params[item]}</Text>
+          <Text p style={titulo} key={params[item]}>{`${item}: ${params[item]}`}</Text>
         ))
         : (<Text p style={titulo}>Usuário não identificado</Text>)
       }
