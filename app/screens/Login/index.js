@@ -50,9 +50,9 @@ function getCookie(cName) {
   console.log("getCookie", res);
   return res;
 }
-const gerarCookie = (token) => {
-  // document.cookie = `tokenUser=${token}; `
-  localStorage.setItem('tokenUser', token);
+const gerarCookie = (token, dadosUsuario) => {
+  localStorage.setItem('tokenSalvoUser', token);
+  localStorage.setItem('dadosUser', dadosUsuario);
 }
 
 function Login({ navigation }) {
@@ -69,14 +69,12 @@ function Login({ navigation }) {
   const schemaLogin = Schemas.schemaLogin();
   const navegarParaSistema = () => {
     const {statusLogin, token, dadosUsuario } = dadosLogin;
-    console.log("navegando", statusLogin, token);
-    // const cookie = getCookie("tokenUser");
-    const cookie = localStorage.getItem("tokenUser");
-    console.log('wwwww', cookie)
-    if (token || cookie) {
+    const tokenSalvoUser = localStorage.getItem("tokenSalvoUser");
+    const dadosSalvoUser = localStorage.getItem("dadosSalvoUser");
+    if (token || tokenSalvoUser) {
       return navigation.reset({
         index: 0, // zera a pilha
-        routes: [{ name: "Home", params: dadosUsuario }],
+        routes: [{ name: "Home", params: dadosUsuario || dadosSalvoUser }],
       });
     }
   }
@@ -111,7 +109,7 @@ function Login({ navigation }) {
               telefone: logado.data.phone || "não identificado"
             }
           })
-          gerarCookie(logado.data.token);
+          gerarCookie(logado.data.token, dadosUsuario);
           navegarParaSistema();
         }
       });
