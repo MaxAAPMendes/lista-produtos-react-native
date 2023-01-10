@@ -2,6 +2,13 @@ import { Text, ListItem, Icon } from "react-native-elements";
 import { ProdutoFavorito } from './ProdutoFavorito';
 import { Skeleton } from '@rneui/themed';
 
+const estiloTitulo = {
+  width: "20vw",
+  whiteSpace: "nowrap", 
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+}
+
 const Carregando = () => {
   const carregando = [];
   for (let index = 0; index <= 3; index++) {
@@ -30,7 +37,12 @@ export function ListaProdutos({ listaProdutos, navigation, buscandoDados }) {
       listaProdutos.map((produto, i) => (
         <ListItem key={`${produto._id}-${i}`} bottomDivider>
           <ListItem.Content key={`cont-nome${produto._id}-${i}`}>
-            <ListItem.Title key={`linome${produto._id}-${i}`}>{produto.name}</ListItem.Title>
+            <ListItem.Title
+              key={`linome${produto._id}-${i}`}
+              style={estiloTitulo}
+            >
+              {produto.name}
+            </ListItem.Title>
           </ListItem.Content>
           <ListItem.Content key={`cont-preco${produto._id}-${i}`}>
             <ListItem.Subtitle key={`lipreco${produto._id}-${i}`}>{produto.price}</ListItem.Subtitle>
