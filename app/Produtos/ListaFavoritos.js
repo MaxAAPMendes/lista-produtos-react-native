@@ -4,6 +4,7 @@ import { Icon, Text, ListItem } from 'react-native-elements';
 import { Produtos as ModelProduto } from '../models/produtos';
 import { Cabecalho } from './Cabecalho';
 import { ListaProdutos } from './ListaProdutos';
+import controllerUsuario from '../../api/controllers/usuario';
 
 const estilo = StyleSheet.create({
   container: {

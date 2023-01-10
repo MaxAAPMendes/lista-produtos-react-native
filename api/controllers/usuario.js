@@ -11,6 +11,7 @@ export class Usuario {
       console.log("Erro ao logar", error);
     }
   }
+
   async cadastrarUsuario(body) {
     const { rest } = config();
     try {
@@ -34,6 +35,39 @@ export class Usuario {
         statusCode: status,
         mensagem,
         data
+      };
+    }
+  }
+
+  async consultarProdutos() {
+    const { rest } = config();
+    try {
+      console.log("consultando produtos...");
+      const token = localStorage.getItem('tokenSalvoUser');
+      const produtos = await rest.get('storeProducts', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log("lista de produtos", produtos);
+      const {
+        status,
+        data,
+        statusText
+      } = produtos;
+      return {
+        status: "sucesso",
+        statusCode: status,
+        mensagem: statusText,
+        data
+      };
+    } catch (erro) {
+      console.log("Erro ao consultar produtos", erro);
+      return {
+        status: "erro",
+        statusCode: null,
+        mensagem: "Erro ao consultar produtos"
       };
     }
   }

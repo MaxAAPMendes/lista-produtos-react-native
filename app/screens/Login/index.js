@@ -35,26 +35,10 @@ const estiloComponente = StyleSheet.create({
   }
 });
 
-const mockUsuario = {
-  nome: "José Testes da Silva",
-  idade: "26 anos",
-  cargo: "Gerente"
-}
-function getCookie(cName) {
-  const name = cName + "=";
-  const cDecoded = decodeURIComponent(document.cookie); //to be careful
-  const cArr = cDecoded .split('; ');
-  let res;
-  cArr.forEach(val => {
-      if (val.indexOf(name) === 0) res = val.substring(name.length);
-  })
-  console.log("getCookie", res);
-  return res;
-}
 const gerarCookie = (token, dadosUsuario) => {
   localStorage.setItem('tokenSalvoUser', token);
-  localStorage.setItem('dadosSalvoUser', dadosUsuario);
-}
+  localStorage.setItem('dadosSalvoUser', JSON.stringify(dadosUsuario));
+};
 
 function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -69,9 +53,9 @@ function Login({ navigation }) {
   });
   const schemaLogin = Schemas.schemaLogin();
   const navegarParaSistema = () => {
-    const {statusLogin, token, dadosUsuario } = dadosLogin;
+    const { token, dadosUsuario } = dadosLogin;
     const tokenSalvoUser = localStorage.getItem("tokenSalvoUser");
-    const dadosSalvoUser = localStorage.getItem("dadosSalvoUser");
+    const dadosSalvoUser = JSON.parse((localStorage.getItem("dadosSalvoUser")));
     if (token || tokenSalvoUser) {
       return navigation.reset({
         index: 0, // zera a pilha
@@ -125,7 +109,7 @@ function Login({ navigation }) {
         const erro = err.errors[0] || ""; 
         setMsgAlerta(erro);
       });
-    modelApp.executaAcaoPorTempo(() => setMsgAlerta(""), 2000);
+    modelApp.executaAcaoPorTempo(() => setMsgAlerta(""), 4000);
   };
   const cadastrarUsuario = () => {
     navigation.navigate("CadastroUsuario");

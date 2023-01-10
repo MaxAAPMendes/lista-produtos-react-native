@@ -1,8 +1,26 @@
 import { Text, ListItem, Icon } from "react-native-elements";
 import { ProdutoFavorito } from './ProdutoFavorito';
+import { Skeleton } from '@rneui/themed';
 
-export function ListaProdutos({ listaProdutos, navigation }) {
+const Carregando = () => {
+  const carregando = [];
+  for (let index = 0; index <= 3; index++) {
+    carregando.push(
+      <Skeleton
+        key={`componente-${index}`}
+        animation="pulse"
+        width={"100%"}
+        height={50}
+        style={{ marginBottom: "10px"}}
+      />
+    )
+  }
+  return carregando;
+}
+
+export function ListaProdutos({ listaProdutos, navigation, buscandoDados }) {
   const renderComponente = () => {
+    if (buscandoDados) return <Carregando />
     if (!listaProdutos || !listaProdutos.length) {
       return (
         <Text h5>Nenhum produto encontrado</Text>

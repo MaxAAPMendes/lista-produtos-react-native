@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, ListItem } from "react-native-elements";
 import { Cabecalho } from './Cabecalho';
 import { ProdutoFavorito } from './ProdutoFavorito';
 import { Icon } from 'react-native-elements';
 import { ListaProdutos } from './ListaProdutos';
+import controllerUsuario from '../../api/controllers/usuario';
 
 const estilo = StyleSheet.create({
   container: {
@@ -47,45 +49,32 @@ const mocks = [
 
 export function Produtos({ navigation }) {
   const { container, titulo } = estilo;
+  const[listaProdutos, setListaProdutos] = useState([]);
+  const[buscandoDados, setBuscandoDados] = useState(false);
+
+  console.log("listaProdutos -------->", listaProdutos);
+  useEffect(() => {
+    async function buscarProdutos() {
+      console.log("consultando lista de produtos --->");
+      setBuscandoDados(true);
+      const data = await controllerUsuario.consultarProdutos();
+      setBuscandoDados(false);
+      console.log(data);
+      const { products = [] } = data;
+      setListaProdutos(products);
+    }
+    buscarProdutos();
+  }, []);
   return (
     <View style={container}>
       <Text h5 style={titulo}>Lista de Produtos Cadastrados</Text>
       <View style={{ width: "95%" }}>
         <Cabecalho />
-        <ListaProdutos listaProdutos={mocks} navigation={navigation}/>
-        {
-          // mocks.map((produto, i) => (
-          //   <ListItem key={`${produto.nome}-${i}`} bottomDivider>
-          //     <ListItem.Content key={`cont-nome${produto.nome}-${i}`}>
-          //       <ListItem.Title key={`linome${produto.nome}-${i}`}>{produto.nome}</ListItem.Title>
-          //     </ListItem.Content>
-          //     <ListItem.Content key={`cont-preco${produto.nome}-${i}`}>
-          //       <ListItem.Subtitle key={`lipreco${produto.nome}-${i}`}>{produto.preco}</ListItem.Subtitle>
-          //     </ListItem.Content>
-          //     <ListItem.Content key={`cont-fav${produto.nome}-${i}`}>
-          //       <ListItem.Subtitle key={`lifav${produto.nome}-${i}`}>
-          //         <ProdutoFavorito produto={produto}/>
-          //       </ListItem.Subtitle>
-          //     </ListItem.Content>
-          //     <ListItem.Content>
-          //       <ListItem.Subtitle>
-          //       <Icon
-          //         key={`iconDetalhes${produto.nome}`}
-          //         name="list"
-          //         type="font-awesome"
-          //         color="#696969"
-          //         onPress={() => navigation
-          //           .navigate(
-          //             "DatalhesProduto",
-          //             { produto }
-          //           )
-          //         }
-          //       />
-          //       </ListItem.Subtitle>
-          //     </ListItem.Content>
-          //   </ListItem>
-          // ))
-        }
+        <ListaProdutos
+          listaProdutos={mocks}
+          navigation={navigation}
+          buscandoDados={buscandoDados}
+        />
       </View>
     </View>
   )
