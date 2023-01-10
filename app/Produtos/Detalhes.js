@@ -44,7 +44,7 @@ export function DatalhesProduto({ route }) {
                 camposDetalhes.map((campo) => (
                   <ListItem.Content key={`cont-fav${produto[campo]}`}>
                     <ListItem.Subtitle key={`lifav${produto[campo]}`}>
-                      {campo === 'favorito'
+                      {campo === 'favorite'
                         ? <ProdutoFavorito produto={produto}/>
                         : produto[campo]
                       }

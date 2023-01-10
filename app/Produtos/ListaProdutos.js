@@ -28,22 +28,22 @@ export function ListaProdutos({ listaProdutos, navigation, buscandoDados }) {
     }
     return (
       listaProdutos.map((produto, i) => (
-        <ListItem key={`${produto.nome}-${i}`} bottomDivider>
-          <ListItem.Content key={`cont-nome${produto.nome}-${i}`}>
-            <ListItem.Title key={`linome${produto.nome}-${i}`}>{produto.nome}</ListItem.Title>
+        <ListItem key={`${produto._id}-${i}`} bottomDivider>
+          <ListItem.Content key={`cont-nome${produto._id}-${i}`}>
+            <ListItem.Title key={`linome${produto._id}-${i}`}>{produto.name}</ListItem.Title>
           </ListItem.Content>
-          <ListItem.Content key={`cont-preco${produto.nome}-${i}`}>
-            <ListItem.Subtitle key={`lipreco${produto.nome}-${i}`}>{produto.preco}</ListItem.Subtitle>
+          <ListItem.Content key={`cont-preco${produto._id}-${i}`}>
+            <ListItem.Subtitle key={`lipreco${produto._id}-${i}`}>{produto.price}</ListItem.Subtitle>
           </ListItem.Content>
-          <ListItem.Content key={`cont-fav${produto.nome}-${i}`}>
-            <ListItem.Subtitle key={`lifav${produto.nome}-${i}`}>
+          <ListItem.Content key={`cont-fav${produto._id}-${i}`}>
+            <ListItem.Subtitle key={`lifav${produto._id}-${i}`}>
               <ProdutoFavorito produto={produto}/>
             </ListItem.Subtitle>
           </ListItem.Content>
           <ListItem.Content>
             <ListItem.Subtitle>
             <Icon
-              key={`iconDetalhes${produto.nome}`}
+              key={`iconDetalhes${produto._id}`}
               name="list"
               type="font-awesome"
               color="#696969"

@@ -60,14 +60,17 @@ export class Usuario {
         status: "sucesso",
         statusCode: status,
         mensagem: statusText,
-        data
+        dados: data
       };
     } catch (erro) {
       console.log("Erro ao consultar produtos", erro);
+      const { response } = erro;
+      const { status, data } = response;
       return {
         status: "erro",
-        statusCode: null,
-        mensagem: "Erro ao consultar produtos"
+        statusCode: status || 500,
+        mensagem: data.message || "Erro ao consultar produtos",
+        dados: erro
       };
     }
   }

@@ -17,6 +17,9 @@ const estilo = StyleSheet.create({
   titulo: {
     color: "#2673b3",
     margin: "20px"
+  },
+  tituloErro: {
+    color: "red"
   }
 });
 
@@ -48,11 +51,16 @@ const mocks = [
 ];
 
 export function Produtos({ navigation }) {
-  const { container, titulo } = estilo;
-  const[listaProdutos, setListaProdutos] = useState([]);
+  const { container, titulo, tituloErro } = estilo;
+  const[dados, setDados] = useState({
+    status: "sucesso",
+    statusCode: null,
+    mensagem: null,
+    dados: []
+  });
   const[buscandoDados, setBuscandoDados] = useState(false);
 
-  console.log("listaProdutos -------->", listaProdutos);
+  console.log("listaProdutos -------->", dados);
   useEffect(() => {
     async function buscarProdutos() {
       console.log("consultando lista de produtos --->");
@@ -60,22 +68,35 @@ export function Produtos({ navigation }) {
       const data = await controllerUsuario.consultarProdutos();
       setBuscandoDados(false);
       console.log(data);
-      const { products = [] } = data;
-      setListaProdutos(products);
+      setDados(data);
     }
     buscarProdutos();
   }, []);
-  return (
-    <View style={container}>
-      <Text h5 style={titulo}>Lista de Produtos Cadastrados</Text>
+  const renderComponente = () => {
+    if (dados.status === "erro") {
+      return (
+        <>
+          <Text h5 style={tituloErro}>Erro ao consultar lista de produtos</Text>
+          <Text p style={tituloErro}>{dados.mensagem || "Tente mais tarde ou faça novo login"}</Text>
+        </>
+      )
+    }
+    return (
       <View style={{ width: "95%" }}>
         <Cabecalho />
         <ListaProdutos
-          listaProdutos={mocks}
+          // listaProdutos={mocks}
+          listaProdutos={dados.dados.products || []}
           navigation={navigation}
           buscandoDados={buscandoDados}
         />
       </View>
+    )
+  }
+  return (
+    <View style={container}>
+      <Text h5 style={titulo}>Lista de Produtos Cadastrados</Text>
+      {renderComponente()}
     </View>
-  )
+  );
 }

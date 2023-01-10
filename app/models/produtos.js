@@ -22,6 +22,6 @@ export class Produtos {
   }
 
   static camposDetalhes() {
-    return ['nome', 'preco', 'favorito']
+    return ['name', 'price', 'favorite']
   }
 }
