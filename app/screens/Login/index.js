@@ -7,6 +7,7 @@ import Schemas from '../../schemas';
 import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
 import controllerUsuario from '../../../api/controllers/usuario';
 import { BotaoAcao } from '../../utils/BotaoAcao';
+import modelApp from '../../models/app';
 
 const estiloComponente = StyleSheet.create({
   container: {
@@ -52,7 +53,7 @@ function getCookie(cName) {
 }
 const gerarCookie = (token, dadosUsuario) => {
   localStorage.setItem('tokenSalvoUser', token);
-  localStorage.setItem('dadosUser', dadosUsuario);
+  localStorage.setItem('dadosSalvoUser', dadosUsuario);
 }
 
 function Login({ navigation }) {
@@ -94,23 +95,28 @@ function Login({ navigation }) {
           setSpinner(true);
           const logado = await controllerUsuario.logar(body);
           setSpinner(false);
-          console.log("logdo no logn", logado);
-          if (logado.status !== 200) {
-            setTipoAlerta(false);
-            setMsgAlerta(logado.data.message || "Erro ao logar");
-            return null;
-          }
-          setDadosLogin({
-            statusLogin: logado.status,
-            token: logado.data.token,
-            dadosUsuario: {
+          if (logado) {
+            if (logado.status !== 200) {
+              setTipoAlerta(false);
+              setMsgAlerta(logado.data.message || "Erro ao logar");
+              return null;
+            }
+            const dadosUsuario = {
               nome: logado.data.name || "não identificado",
               id: logado.data.userId || "não identificado",
               telefone: logado.data.phone || "não identificado"
             }
-          })
-          gerarCookie(logado.data.token, dadosUsuario);
-          navegarParaSistema();
+            setDadosLogin({
+              statusLogin: logado.status,
+              token: logado.data.token,
+              dadosUsuario,
+            })
+            gerarCookie(logado.data.token, dadosUsuario);
+            navegarParaSistema();
+          } else {
+            setTipoAlerta(false);
+            setMsgAlerta("Falha ao logar, tente novamente!!!");
+          }
         }
       });
     schemaLogin.validate({email, senha})
@@ -119,6 +125,7 @@ function Login({ navigation }) {
         const erro = err.errors[0] || ""; 
         setMsgAlerta(erro);
       });
+    modelApp.executaAcaoPorTempo(() => setMsgAlerta(""), 2000);
   };
   const cadastrarUsuario = () => {
     navigation.navigate("CadastroUsuario");

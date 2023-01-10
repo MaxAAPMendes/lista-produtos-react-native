@@ -13,5 +13,15 @@ export class ModelApp {
     }
     return stack;
   }
+
+  executaAcaoPorTempo(acao, tempo) {
+    console.log("funcao por tempo")
+    setTimeout(() => {
+      acao();
+    }, tempo);
+  }
 }
+
+const modelApp = new ModelApp();
+export default modelApp;
 
