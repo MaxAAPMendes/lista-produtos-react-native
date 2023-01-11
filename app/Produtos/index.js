@@ -20,6 +20,17 @@ const estilo = StyleSheet.create({
   },
   tituloErro: {
     color: "red"
+  },
+  containerSlider: {
+    width: "100%",
+    height: "50px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "2px solid #dcdcdc",
+    "& > *": {
+      margin: "10px"
+    }
   }
 });
 
@@ -51,7 +62,7 @@ const mocks = [
 ];
 
 export function Produtos({ navigation }) {
-  const { container, titulo, tituloErro } = estilo;
+  const { container, titulo, tituloErro, containerSlider } = estilo;
   const[dados, setDados] = useState({
     status: "sucesso",
     statusCode: null,
@@ -59,6 +70,7 @@ export function Produtos({ navigation }) {
     dados: []
   });
   const[buscandoDados, setBuscandoDados] = useState(false);
+  const[pagina, setPagina] = useState(1);
 
   console.log("listaProdutos -------->", dados);
   useEffect(() => {
@@ -72,6 +84,36 @@ export function Produtos({ navigation }) {
     }
     buscarProdutos();
   }, []);
+  const diminuirPagina = () => {
+    if (pagina === 1) return null;
+    setPagina(pagina - 1)
+  }
+  const slider = () => {
+    const {totalItems} = dados.dados;
+    if (totalItems) return null;
+    console.log(dados.dados.totalItems);
+    return (
+      <div style={containerSlider}>
+        <Icon
+          size={20}
+          raised
+          color="#2673b3"
+          name="caret-left"
+          type="font-awesome"
+          onPress={diminuirPagina}
+        />
+        <Text p>{`página ${pagina} de {4}`}</Text>
+        <Icon
+          size={20}
+          raised
+          color="#2673b3"
+          name="caret-right"
+          type="font-awesome"
+          onPress={() => setPagina(pagina + 1)}
+        />
+      </div>
+    )
+  }
   const renderComponente = () => {
     if (dados.status === "erro") {
       return (
@@ -90,6 +132,7 @@ export function Produtos({ navigation }) {
           navigation={navigation}
           buscandoDados={buscandoDados}
         />
+        {slider()}
       </View>
     )
   }
