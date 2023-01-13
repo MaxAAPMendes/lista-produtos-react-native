@@ -37,8 +37,8 @@ FEITO - Botão de logout
 ## TELA DE PRODUTOS
 FEITO - Tela que exibirá em uma lista os dados dos produtos
 FEITO - Cada item deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
-!!!! PENDENTE - Esse ListView utilizará a paginação de resultados.
-!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos /storeProducts/
+FEITO - Esse ListView utilizará a paginação de resultados.
+FEITO - Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos /storeProducts/
 Ao carregar a tela, deverá buscar a posição do usuário.
 
 ## TELA DE FAVORITOS

@@ -4,7 +4,8 @@ import { Icon, Text, ListItem } from 'react-native-elements';
 import { Produtos as ModelProduto } from '../models/produtos';
 import { Cabecalho } from './Cabecalho';
 import { ListaProdutos } from './ListaProdutos';
-import controllerUsuario from '../../api/controllers/usuario';
+import controllerProdutos from '../../api/controllers/produtos';
+
 
 const estilo = StyleSheet.create({
   container: {
@@ -52,7 +53,14 @@ export function ListaFavoritos({ navigation }) {
   
   useEffect(() => {
     // buscar lista na api
-    setProdutosFavoritos(mocks);
+    async function buscarProdutosFavoritos() {
+      // setBuscandoDados(true);
+      const favoritos = await controllerProdutos.consultarProdutosFavoritos();
+      console.log(favoritos);
+      // setBuscandoDados(false);
+      // setProdutosFavoritos(favoritos.dados);
+    }
+    buscarProdutosFavoritos();
   }, []);
   return (
     <View style={container}>
