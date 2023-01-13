@@ -83,13 +83,12 @@ export function Produtos({ navigation }) {
   useEffect(() => {
     async function buscarProdutos() {
       setBuscandoDados(true);
-      const data = await controllerProdutos.consultarProdutos();
+      const data = await controllerProdutos.consultarProdutos(pagina);
       setBuscandoDados(false);
-      
       setDados(data);
     }
     buscarProdutos();
-  }, []);
+  }, [pagina]);
   const diminuirPagina = () => {
     if (pagina === 1) return null;
     setPagina(pagina - 1)

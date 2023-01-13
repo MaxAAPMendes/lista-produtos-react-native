@@ -2,12 +2,12 @@ import { config } from '../config';
 
 export class Produtos {
 
-  async consultarProdutos() {
+  async consultarProdutos(pagina) {
     const { rest } = config();
     try {
-      console.log("consultando produtos...");
+      console.log("consultando produtos...página", pagina);
       const token = localStorage.getItem('tokenSalvoUser');
-      const produtos = await rest.get('storeProducts', {
+      const produtos = await rest.get(`storeProducts?page=${pagina}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
