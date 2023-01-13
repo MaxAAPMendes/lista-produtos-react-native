@@ -7,7 +7,7 @@ export class Produtos {
       },
       {
         campo: 'preco',
-        rotulo: 'Preço (R$)'
+        rotulo: 'Preço'
       },
       {
         campo: 'favorito',

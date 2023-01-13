@@ -64,8 +64,8 @@ export class Usuario {
       };
     } catch (erro) {
       console.log("Erro ao consultar produtos", erro);
-      const { response } = erro;
-      const { status, data } = response;
+      // const { response } = erro;
+      const { status, data } = erro?.response;
       return {
         status: "erro",
         statusCode: status || 500,

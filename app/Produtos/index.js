@@ -61,6 +61,12 @@ const mocks = [
   },
 ];
 
+const determinarNumeroPaginas = (totalItems) => {
+  if (totalItems <= 5) return 1;
+  if (!(totalItems%5)) return (totalItems/5);
+  return (Math.floor(totalItems/5) + 1);
+}
+
 export function Produtos({ navigation }) {
   const { container, titulo, tituloErro, containerSlider } = estilo;
   const[dados, setDados] = useState({
@@ -75,11 +81,10 @@ export function Produtos({ navigation }) {
   console.log("listaProdutos -------->", dados);
   useEffect(() => {
     async function buscarProdutos() {
-      console.log("consultando lista de produtos --->");
       setBuscandoDados(true);
       const data = await controllerUsuario.consultarProdutos();
       setBuscandoDados(false);
-      console.log(data);
+      
       setDados(data);
     }
     buscarProdutos();
@@ -88,10 +93,13 @@ export function Produtos({ navigation }) {
     if (pagina === 1) return null;
     setPagina(pagina - 1)
   }
-  const slider = () => {
-    const {totalItems} = dados.dados;
-    if (totalItems) return null;
-    console.log(dados.dados.totalItems);
+  const aumentarPagina = (totalPaginas) => {
+    if (pagina >= totalPaginas) return null;
+    setPagina(pagina + 1);
+  }
+  const slider = (totalItems) => {
+    if (!totalItems) return null;
+    const totalPaginas = determinarNumeroPaginas(totalItems);
     return (
       <div style={containerSlider}>
         <Icon
@@ -102,14 +110,14 @@ export function Produtos({ navigation }) {
           type="font-awesome"
           onPress={diminuirPagina}
         />
-        <Text p>{`página ${pagina} de {4}`}</Text>
+        <Text p>{`página ${pagina} de ${totalPaginas}`}</Text>
         <Icon
           size={20}
           raised
           color="#2673b3"
           name="caret-right"
           type="font-awesome"
-          onPress={() => setPagina(pagina + 1)}
+          onPress={() => aumentarPagina(totalPaginas)}
         />
       </div>
     )
@@ -132,7 +140,7 @@ export function Produtos({ navigation }) {
           navigation={navigation}
           buscandoDados={buscandoDados}
         />
-        {slider()}
+        {slider(dados.dados.totalItems)}
       </View>
     )
   }
