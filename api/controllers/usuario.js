@@ -38,57 +38,7 @@ export class Usuario {
       };
     }
   }
-
-  async consultarProdutos() {
-    const { rest } = config();
-    try {
-      console.log("consultando produtos...");
-      const token = localStorage.getItem('tokenSalvoUser');
-      const produtos = await rest.get('storeProducts', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      console.log("lista de produtos", produtos);
-      const {
-        status,
-        data,
-        statusText
-      } = produtos;
-      return {
-        status: "sucesso",
-        statusCode: status,
-        mensagem: statusText,
-        dados: data
-      };
-    } catch (erro) {
-      console.log("Erro ao consultar produtos", erro);
-      // const { response } = erro;
-      const { status, data } = erro?.response;
-      return {
-        status: "erro",
-        statusCode: status || 500,
-        mensagem: data.message || "Erro ao consultar produtos",
-        dados: erro
-      };
-    }
-  }
 }
 
 const controllerUsuario = new Usuario();
 export default controllerUsuario;
-
-/*
-200
-j@gmail.com
-{
-	"message": "User created successfully",
-	"userId": "63bb2c041f11992431703b5b"
-}
-
-jt@gmail.com
-message: "User created successfully"
-​​
-userId: "63bc83739b02e844c65d8065"
-*/

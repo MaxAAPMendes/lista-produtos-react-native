@@ -5,7 +5,8 @@ import { Cabecalho } from './Cabecalho';
 import { ProdutoFavorito } from './ProdutoFavorito';
 import { Icon } from 'react-native-elements';
 import { ListaProdutos } from './ListaProdutos';
-import controllerUsuario from '../../api/controllers/usuario';
+import controllerProdutos from '../../api/controllers/produtos';
+
 
 const estilo = StyleSheet.create({
   container: {
@@ -82,7 +83,7 @@ export function Produtos({ navigation }) {
   useEffect(() => {
     async function buscarProdutos() {
       setBuscandoDados(true);
-      const data = await controllerUsuario.consultarProdutos();
+      const data = await controllerProdutos.consultarProdutos();
       setBuscandoDados(false);
       
       setDados(data);
