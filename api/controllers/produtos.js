@@ -82,6 +82,26 @@ export class Produtos {
       }
     }
   }
+
+  async consultarDetalhesProduto(idProduto) {
+    const { rest } = config();
+    try {
+      const detalhes = await rest.get(`storeProducts/product/${idProduto}`);
+      console.log(detalhes);
+      const retornoRequisicao = this.gerenciarRetornoRequisicao(detalhes.status);
+      const { status } = retornoRequisicao;
+      return {
+        status,
+        dados: detalhes.data.product
+      }
+    } catch(erro) {
+      console.log("erro ao consultar detalhes", erro);
+      return {
+        status: "erro",
+        mensagem: erro.message || "Erro ao consultar detalhes do produto"
+      }
+    }
+  }
 }
 
 const controllerProdutos = new Produtos();

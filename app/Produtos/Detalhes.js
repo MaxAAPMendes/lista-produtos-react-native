@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Icon, Text, ListItem } from 'react-native-elements';
+import { Text, ListItem } from 'react-native-elements';
 import { Produtos } from '../models/produtos';
 import { ProdutoFavorito } from './ProdutoFavorito';
+import controllerProdutos from '../../api/controllers/produtos';
 
 const estilo = StyleSheet.create({
   container: {
@@ -19,7 +21,18 @@ const estilo = StyleSheet.create({
 export function DatalhesProduto({ route }) {
   const cabecalho = Produtos.dadosCabecalho().filter((i) => i.campo !== 'detalhes');
   const camposDetalhes = Produtos.camposDetalhes();
+  const [detalhesProduto, setDetalhesProduto] = useState(null);
   const { produto } = route.params;
+  useEffect(() => {
+    async function consultarDetalhes() {
+      const detalhes = await controllerProdutos.consultarDetalhesProduto(produto._id);
+      console.log(detalhes);
+      setDetalhesProduto({
+        lojas: detalhes.dados.stores || []
+      })
+    };
+    consultarDetalhes();
+  }, []);
   const { container, titulo } = estilo;
   return (
     <View style={container}>
@@ -52,6 +65,24 @@ export function DatalhesProduto({ route }) {
                 ))
               }
             </ListItem>
+            {
+              (detalhesProduto && detalhesProduto.lojas.length) && (
+                <>
+                  <Text>Lojas:</Text>
+                  <div>
+                    {
+                      detalhesProduto.lojas.map((loja) => (
+                        <>
+                          <span id={`nomeloja${loja.name}`}>{loja.name}</span>
+                          <span id={`endloja${loja.name}`}>{loja.address}</span>
+                          <hr />
+                        </>
+                      ))
+                    }
+                  </div>
+                </>
+              )
+            }
           </View>
         )
       }
