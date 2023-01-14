@@ -8,7 +8,6 @@ import { Sair } from './Sair';
 const Drawer = createDrawerNavigator();
 
 export function MenuLateral({ dadosUsuario }) {
-  console.log("Menulateral", dadosUsuario);
   return (
     <Drawer.Navigator initialRouteName="Produtos">
       <Drawer.Screen name="Perfil" component={PerfilUsuario} initialParams={dadosUsuario}/>

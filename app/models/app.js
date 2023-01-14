@@ -15,7 +15,6 @@ export class ModelApp {
   }
 
   executaAcaoPorTempo(acao, tempo) {
-    console.log("funcao por tempo")
     setTimeout(() => {
       acao();
     }, tempo);

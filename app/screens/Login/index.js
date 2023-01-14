@@ -64,7 +64,6 @@ function Login({ navigation }) {
     }
   }
   useEffect(() => {
-    console.log("useEffect...")
     navegarParaSistema();
   }, [dadosLogin]);
   const entrar = () => {

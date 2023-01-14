@@ -17,7 +17,6 @@ const estilo = StyleSheet.create({
 });
 
 export function DatalhesProduto({ route }) {
-  console.log("Componente detalhes", route.params?.produto);
   const cabecalho = Produtos.dadosCabecalho().filter((i) => i.campo !== 'detalhes');
   const camposDetalhes = Produtos.camposDetalhes();
   const { produto } = route.params;

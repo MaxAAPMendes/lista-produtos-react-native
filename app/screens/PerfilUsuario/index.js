@@ -16,9 +16,7 @@ const estiloComponente = StyleSheet.create({
 });
 
 export function PerfilUsuario({ route }) {
-  console.log("perfil", route);
   const { params } = route;
-  // const nomeUsuario = route
   const { container, titulo } = estiloComponente;
   return (
     <View style={container}>

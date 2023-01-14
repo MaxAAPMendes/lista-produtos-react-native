@@ -74,10 +74,8 @@ export class Produtos {
     const { rest } = config();
     try {
       const favorito = await rest.post('storeProducts/manageFavorite', body);
-      console.log(favorito);
       return this.gerenciarRetornoRequisicao(favorito.status);
     } catch (error) {
-      console.log("Erro na marcação de favorito", error);
       return {
         status: "erro",
         mensagem: error.message || "Erro ao marcar/desmarcar favorito"

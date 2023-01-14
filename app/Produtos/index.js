@@ -79,7 +79,6 @@ export function Produtos({ navigation }) {
   const[buscandoDados, setBuscandoDados] = useState(false);
   const[pagina, setPagina] = useState(1);
 
-  console.log("listaProdutos -------->", dados);
   useEffect(() => {
     async function buscarProdutos() {
       setBuscandoDados(true);

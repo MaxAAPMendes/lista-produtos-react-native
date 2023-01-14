@@ -12,7 +12,6 @@ const estiloComponente = StyleSheet.create({
 });
 
 function Home({ route }) {
-  console.log("home", route);
   const { params } = route;
   const {
     container, titulo
