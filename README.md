@@ -44,7 +44,7 @@ Ao carregar a tela, deverá buscar a posição do usuário.
 ## TELA DE FAVORITOS
 FEITO - Tela exibirá os produtos determinados como favoritos dos usuários.
 FEITO - A tabela deverá mostrar: Nome do Produto, Preço do Produto, Favorito e um botão de visualizar detalhe (Ir a tela Detalhe do produto).
-!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos favoritos /storeProducts/getFavProduts
+FEITO - Você utilizará a API MBA Presencial - Trabalho Final - Busca todos os produtos favoritos /storeProducts/getFavProduts
 
 ## TELA DETALHES DO PRODUTO
 Tela que exibirá os detalhes de um produto.
@@ -53,4 +53,5 @@ FEITO - Nome do Produto
 FEITO - Preço do Produto
 FEITO - Se é Favorito do usuário (e um botão para marcar/desmarcar favorito)
 !!!! PENDENTE - Mapa com a posição do usuário e as lojas com o produto disponível
-!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca informação de um produto /storeProducts/product/:productID e API MBA Presencial - Trabalho Final - Adicionar ou remove um produto como favorito da pessoa /storeProducts/manageFavorite
+!!!! PENDENTE - Você utilizará a API MBA Presencial - Trabalho Final - Busca informação de um produto /storeProducts/product/:productID e 
+FEITO - API MBA Presencial - Trabalho Final - Adicionar ou remove um produto como favorito da pessoa /storeProducts/manageFavorite

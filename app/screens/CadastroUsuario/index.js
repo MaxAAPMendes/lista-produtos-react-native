@@ -55,7 +55,6 @@ function CadastroUsuario() {
     }
   }
   const cadastrar = () => {
-    console.log("cadastrar usuário");
     const dadosCadastro = { nome, telefone, email, senha }
     schemaCadastro.isValid(dadosCadastro)
       .then(async (valido) => {
@@ -67,10 +66,8 @@ function CadastroUsuario() {
             email,
             password: senha
           }
-          console.log("chamar método post para cadastrar usuário", body);
           setSpinner(true);
           const resultado = await controllerUsuario.cadastrarUsuario(body);
-          console.log("ssss", resultado);
           setSpinner(false);
           setTipoAlerta(resultado.status === "sucesso");
           setMsgAlerta(resultado.mensagem);

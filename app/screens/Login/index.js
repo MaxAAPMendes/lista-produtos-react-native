@@ -109,7 +109,7 @@ function Login({ navigation }) {
         const erro = err.errors[0] || ""; 
         setMsgAlerta(erro);
       });
-    modelApp.executaAcaoPorTempo(() => setMsgAlerta(""), 4000);
+    modelApp.executaAcaoPorTempo(() => setMsgAlerta(""), 5000);
   };
   const cadastrarUsuario = () => {
     navigation.navigate("CadastroUsuario");

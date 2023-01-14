@@ -5,16 +5,7 @@ export class Produtos {
   async consultarProdutos(pagina) {
     const { rest } = config();
     try {
-      console.log("consultando produtos...página", pagina);
-      // const token = localStorage.getItem('tokenSalvoUser');
-      // const produtos = await rest.get(`storeProducts?page=${pagina}`, {
-      //   headers: {
-      //     'Authorization': `Bearer ${token}`,
-      //     'Content-Type': 'application/json'
-      //   }
-      // })
       const produtos = await rest.get(`storeProducts?page=${pagina}`);
-      console.log("lista de produtos", produtos);
       const {
         data,
         statusText
@@ -25,7 +16,6 @@ export class Produtos {
         dados: data
       };
     } catch (erro) {
-      console.log("Erro ao consultar produtos", erro);
       return {
         status: "erro",
         mensagem: erro.message || "Erro ao consultar produtos",
@@ -37,7 +27,6 @@ export class Produtos {
     const { rest } = config();
     try {
       const favoritos = await rest.get('storeProducts/getFavProducts');
-      console.log(favoritos);
       let listaFavoritos;
       if (favoritos && favoritos.status === 200) {
         listaFavoritos = favoritos.data.products || [];
@@ -48,10 +37,50 @@ export class Produtos {
         dados: listaFavoritos
       }
     } catch(erro) {
-      console.log("Erro a consulta favoritos", erro);
       return {
         status: "erro",
         mensagem: erro.message || "Erro ao consultar produtos favoritos",
+      }
+    }
+  }
+
+  gerenciarRetornoRequisicao(statusCode) {
+    let status = "erro";
+    let mensagem = "Hmm, aconteceu um erro. Tente novamente"
+    switch (statusCode) {
+      case 200:
+        status = "sucesso",
+        mensagem = "produto alterado"
+        break;
+      case 201:
+        mensagem = "Usuário não encontrado"
+        break;
+      case 202:
+        mensagem = "Produto não encontrado"
+        break;
+      case 422:
+        mensagem = "Erro de validação"
+        break;
+      default:
+        break;
+    }
+    return {
+      status,
+      mensagem
+    }
+  }
+
+  async gerenciarFavorito(body) {
+    const { rest } = config();
+    try {
+      const favorito = await rest.post('storeProducts/manageFavorite', body);
+      console.log(favorito);
+      return this.gerenciarRetornoRequisicao(favorito.status);
+    } catch (error) {
+      console.log("Erro na marcação de favorito", error);
+      return {
+        status: "erro",
+        mensagem: error.message || "Erro ao marcar/desmarcar favorito"
       }
     }
   }

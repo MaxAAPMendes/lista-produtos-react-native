@@ -22,8 +22,6 @@ const estilo = StyleSheet.create({
 });
 
 const listaQualificada = (lista) => {
-  console.log(lista)
-  // if (!lista || !lista.legth) return [];
   return adicionarFlagFavorito(lista);
 }
 
@@ -40,7 +38,6 @@ export function ListaFavoritos({ navigation }) {
     async function buscarProdutosFavoritos() {
       setBuscandoDados(true);
       const favoritos = await controllerProdutos.consultarProdutosFavoritos();
-      console.log(favoritos);
       setBuscandoDados(false);
       setProdutosFavoritos({
         status: favoritos.status,
@@ -50,7 +47,6 @@ export function ListaFavoritos({ navigation }) {
     }
     buscarProdutosFavoritos();
   }, []);
-  console.log(listaProdutosFavoritos);
   return (
     <View style={container}>
       <Text h5 style={titulo}>
