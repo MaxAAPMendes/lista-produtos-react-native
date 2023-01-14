@@ -58,7 +58,7 @@ export function ListaFavoritos({ navigation }) {
       const favoritos = await controllerProdutos.consultarProdutosFavoritos();
       console.log(favoritos);
       // setBuscandoDados(false);
-      // setProdutosFavoritos(favoritos.dados);
+      setProdutosFavoritos(favoritos.dados);
     }
     buscarProdutosFavoritos();
   }, []);
