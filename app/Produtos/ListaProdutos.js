@@ -1,28 +1,12 @@
 import { Text, ListItem, Icon } from "react-native-elements";
 import { ProdutoFavorito } from './ProdutoFavorito';
-import { Skeleton } from '@rneui/themed';
+import { Carregando } from '../utils/Carregando';
 
 const estiloTitulo = {
   width: "20vw",
   whiteSpace: "nowrap", 
   overflow: "hidden",
   textOverflow: "ellipsis",
-}
-
-const Carregando = () => {
-  const carregando = [];
-  for (let index = 0; index <= 4; index++) {
-    carregando.push(
-      <Skeleton
-        key={`componente-${index}`}
-        animation="pulse"
-        width={"100%"}
-        height={60}
-        style={{ marginBottom: "20px"}}
-      />
-    )
-  }
-  return carregando;
 }
 
 export function ListaProdutos({ listaProdutos, navigation, buscandoDados }) {

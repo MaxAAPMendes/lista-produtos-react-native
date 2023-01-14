@@ -44,6 +44,7 @@ export class Produtos {
       }
       return {
         status: "sucesso",
+        mensagem: "Dados buscados com sucesso",
         dados: listaFavoritos
       }
     } catch(erro) {

@@ -5,6 +5,7 @@ import { Produtos as ModelProduto } from '../models/produtos';
 import { Cabecalho } from './Cabecalho';
 import { ListaProdutos } from './ListaProdutos';
 import controllerProdutos from '../../api/controllers/produtos';
+import { render } from "react-dom";
 
 
 const estilo = StyleSheet.create({
@@ -49,16 +50,25 @@ const mocks = [
 
 export function ListaFavoritos({ navigation }) {
   const { container, titulo } = estilo;
-  const [listaProdutosFavoritos, setProdutosFavoritos] = useState(null);
+  const [buscandoDados, setBuscandoDados] = useState(false);
+  const [listaProdutosFavoritos, setProdutosFavoritos] = useState({
+    status: null,
+    mensagem: null,
+    dados: null
+  });
   
   useEffect(() => {
     // buscar lista na api
     async function buscarProdutosFavoritos() {
-      // setBuscandoDados(true);
+      setBuscandoDados(true);
       const favoritos = await controllerProdutos.consultarProdutosFavoritos();
       console.log(favoritos);
-      // setBuscandoDados(false);
-      setProdutosFavoritos(favoritos.dados);
+      setBuscandoDados(false);
+      setProdutosFavoritos({
+        status: favoritos.status,
+        mensagem: favoritos.mensagem,
+        dados: favoritos.dados
+      });
     }
     buscarProdutosFavoritos();
   }, []);
@@ -68,8 +78,13 @@ export function ListaFavoritos({ navigation }) {
         Lista de Favoritos
       </Text>
       <View style={{ width: "95%" }}>
+        {/* {renderComponente()} */}
         <Cabecalho />
-        <ListaProdutos listaProdutos={mocks} navigation={navigation}/>
+        <ListaProdutos
+          listaProdutos={listaProdutosFavoritos || []}
+          navigation={navigation}
+          buscandoDados={buscandoDados}
+        />
       </View>
     </View>
   )
