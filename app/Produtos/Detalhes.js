@@ -66,30 +66,12 @@ export function DatalhesProduto({ route }) {
                 ))
               }
             </ListItem>
-            {/* {
-              (detalhesProduto && detalhesProduto.lojas.length) && (
-                <>
-                  <Text>Lojas:</Text>
-                  <div>
-                    {
-                      detalhesProduto.lojas.map((loja) => (
-                        <>
-                          <span id={`nomeloja${loja.name}`}>{loja.name}</span>
-                          <span id={`endloja${loja.name}`}>{loja.address}</span>
-                          <hr />
-                        </>
-                      ))
-                    }
-                  </div>
-                </>
-              )
-            } */}
           </View>
         )
       }
       {/* -15.844001313056182, -48.02588957644806 */}
       <View>
-        <MapView
+        {/* <MapView
           showsUserLocation={true} //destacando a localização do usuário no mapa
      	    showsMyLocationButton={false}	//ocultando o btn que move o mapa para a localização do usuário
           toolbarEnabled={false}//ocultando opções do google maps ao clicar em objetos do mapa
@@ -114,7 +96,7 @@ export function DatalhesProduto({ route }) {
               description={loja.address}
             />
           ))}
-        </MapView>
+        </MapView> */}
       </View>
     </View>
   )
