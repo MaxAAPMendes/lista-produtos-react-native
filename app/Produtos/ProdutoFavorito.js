@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Icon } from 'react-native-elements';
 
 export function ProdutoFavorito({ produto }) {
-  const { favorito: favorite } = produto;
+  const { favorite } = produto;
   const [favoritado, setFavoritado] = useState(favorite);
   const favoritarProduto = () => {
     // chamar o metodo para gravar favorito

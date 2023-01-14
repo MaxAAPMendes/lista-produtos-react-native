@@ -1,6 +1,7 @@
 import { Text, ListItem, Icon } from "react-native-elements";
 import { ProdutoFavorito } from './ProdutoFavorito';
-import { Carregando } from '../utils/Carregando';
+import { Carregando } from '../utils/componentes/Carregando';
+
 
 const estiloTitulo = {
   width: "20vw",

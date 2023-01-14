@@ -4,9 +4,10 @@ import { Text } from '@rneui/themed';
 import { Input, Button } from 'react-native-elements';
 import { ModelUsuario } from '../../models/usuario';
 import Schemas from '../../schemas';
-import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
+import { MensagemValidacaoInput } from '../../utils/componentes/MensagemValidacaoInput';
 import controllerUsuario from '../../../api/controllers/usuario';
-import { BotaoAcao } from '../../utils/BotaoAcao';
+import { BotaoAcao } from '../../utils/componentes/BotaoAcao';
+
 
 const estiloComponente = StyleSheet.create({
   container: {

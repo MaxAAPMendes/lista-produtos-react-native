@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import { Icon, Text, ListItem } from 'react-native-elements';
-import { Produtos as ModelProduto } from '../models/produtos';
+import { Text } from 'react-native-elements';
 import { Cabecalho } from './Cabecalho';
 import { ListaProdutos } from './ListaProdutos';
 import controllerProdutos from '../../api/controllers/produtos';
-import { render } from "react-dom";
+import { adicionarFlagFavorito } from '../utils/funcoes/adicionarFlagFavorito';
+
 
 
 const estilo = StyleSheet.create({
@@ -21,32 +21,11 @@ const estilo = StyleSheet.create({
   },
 });
 
-const mocks = [
-  {
-    nome: "Leite",
-    preco: "R$ 25,52",
-    favorito: true,
-    detalhes: "Detalhes do produto leite"
-  },
-  {
-    nome: "Cerveja",
-    preco: "R$ 25,52",
-    favorito: true,
-    detalhes: "Detalhes do produto CERVEJA"
-  },
-  {
-    nome: "Carne de frango",
-    preco: "R$ 25,52",
-    favorito: true,
-    detalhes: "Detalhes do produto Carne de frango"
-  },
-  {
-    nome: "Tomate",
-    preco: "R$ 25,52",
-    favorito: true,
-    detalhes: "Detalhes do produto TOMATE"
-  },
-];
+const listaQualificada = (lista) => {
+  console.log(lista)
+  // if (!lista || !lista.legth) return [];
+  return adicionarFlagFavorito(lista);
+}
 
 export function ListaFavoritos({ navigation }) {
   const { container, titulo } = estilo;
@@ -58,7 +37,6 @@ export function ListaFavoritos({ navigation }) {
   });
   
   useEffect(() => {
-    // buscar lista na api
     async function buscarProdutosFavoritos() {
       setBuscandoDados(true);
       const favoritos = await controllerProdutos.consultarProdutosFavoritos();
@@ -67,21 +45,21 @@ export function ListaFavoritos({ navigation }) {
       setProdutosFavoritos({
         status: favoritos.status,
         mensagem: favoritos.mensagem,
-        dados: favoritos.dados
+        dados: listaQualificada(favoritos.dados)
       });
     }
     buscarProdutosFavoritos();
   }, []);
+  console.log(listaProdutosFavoritos);
   return (
     <View style={container}>
       <Text h5 style={titulo}>
         Lista de Favoritos
       </Text>
       <View style={{ width: "95%" }}>
-        {/* {renderComponente()} */}
         <Cabecalho />
         <ListaProdutos
-          listaProdutos={listaProdutosFavoritos || []}
+          listaProdutos={listaProdutosFavoritos.dados}
           navigation={navigation}
           buscandoDados={buscandoDados}
         />

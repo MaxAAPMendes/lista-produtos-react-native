@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import { Input, Button } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import { Text } from '@rneui/themed';
 import { useState } from "react";
 import Schemas from '../../schemas';
-import { MensagemValidacaoInput } from '../../utils/MensagemValidacaoInput';
+import { MensagemValidacaoInput } from '../../utils/componentes/MensagemValidacaoInput';
 import controllerUsuario from '../../../api/controllers/usuario';
-import { BotaoAcao } from '../../utils/BotaoAcao';
+import { BotaoAcao } from '../../utils/componentes/BotaoAcao';
 import modelApp from '../../models/app';
 
 const estiloComponente = StyleSheet.create({
@@ -149,10 +149,6 @@ function Login({ navigation }) {
           // errorMessage='Entrada inválida'
         />
         <MensagemValidacaoInput tipoAlerta={tipoAlerta} msgAlerta={msgAlerta} />
-        {/* <Button
-          title=
-          onPress={entrar}
-        /> */}
         <BotaoAcao
           titulo={spinner ? "Logando..." : "ENTRAR"}
           acao={entrar}
