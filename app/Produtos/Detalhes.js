@@ -4,10 +4,11 @@ import { Text, ListItem } from 'react-native-elements';
 import { Produtos } from '../models/produtos';
 import { ProdutoFavorito } from './ProdutoFavorito';
 import controllerProdutos from '../../api/controllers/produtos';
+// import MapView, { Marker } from 'react-native-maps';
 
 const estilo = StyleSheet.create({
   container: {
-    backgroundColor: "#f2f2f2",
+    // backgroundColor: "#f2f2f2",
     // flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -65,7 +66,7 @@ export function DatalhesProduto({ route }) {
                 ))
               }
             </ListItem>
-            {
+            {/* {
               (detalhesProduto && detalhesProduto.lojas.length) && (
                 <>
                   <Text>Lojas:</Text>
@@ -82,12 +83,38 @@ export function DatalhesProduto({ route }) {
                   </div>
                 </>
               )
-            }
+            } */}
           </View>
         )
       }
+      {/* -15.844001313056182, -48.02588957644806 */}
       <View>
-        mapa
+        <MapView
+          showsUserLocation={true} //destacando a localização do usuário no mapa
+     	    showsMyLocationButton={false}	//ocultando o btn que move o mapa para a localização do usuário
+          toolbarEnabled={false}//ocultando opções do google maps ao clicar em objetos do mapa
+          style={{
+            height: '100%',
+            width: '100%',
+            position: 'absolute',		
+          }}	// Fazendo com que o mapa ocupe a tela inteira
+          initialRegion={{
+            latitude: 37.78825,	//posição inicial do mapa
+            longitude: -122.4324, //posição inicial do mapa
+            latitudeDelta: 0.0922,  	//determina o zoom do mapa
+            longitudeDelta: 0.0421,	//determina o zoom do mapa
+            // ...coords	// Aqui sobrescrevemos as variáveis latitude e longitude com a posição do usuário obtida no hook que criamos para obter a localização.
+          }}
+        >
+          {detalhes.dados.stores.map((loja, index) => (
+            <Marker
+              key={`loja-${loja.name}`}
+              coordinate={{ latitude : loja.latitude, longitude: loja.longitude }}
+              title={loja.name}
+              description={loja.address}
+            />
+          ))}
+        </MapView>
       </View>
     </View>
   )
